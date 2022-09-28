@@ -5,8 +5,6 @@ using UnityEngine;
 public class BlockObs : MonoBehaviour
 {
     public GameObject block;
-    private float closestDistanceX;
-    private float closestDistanceZ;
     public GameObject player;
 
     int stop;

@@ -13,6 +13,24 @@ public class PlayerMovement : MonoBehaviour
     [HideInInspector]
     public bool gameStart = false;
 
+    private void OnEnable()
+    {
+        Score.milestone += ChangeColor;
+    }
+
+    private void OnDisable()
+    {
+        Score.milestone -= ChangeColor;
+    }
+
+    public void ChangeColor(int nothing)
+    {
+        if(nothing == 100)
+        {
+            rb.GetComponent<MeshRenderer>().material.SetColor("_Color", Color.blue);
+        }
+    }
+
     void FixedUpdate()
     {
         if (gameStart == true)

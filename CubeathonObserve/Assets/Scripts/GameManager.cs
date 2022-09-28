@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -17,6 +18,34 @@ public class GameManager : MonoBehaviour
 
     public GameObject player;
 
+    public Text MilestoneText;
+
+    private void OnEnable()
+    {
+        PlayerCollision.OnHitObstacle += EndGame;
+        Score.milestone += DisplayMilestone;
+    }
+
+    private void OnDisable()
+    {
+        PlayerCollision.OnHitObstacle -= EndGame;
+        Score.milestone -= DisplayMilestone;
+    }
+
+    public void DisplayMilestone(int number)
+    {
+        Debug.Log("This Event Worked!");
+        MilestoneText.text = number.ToString("0");
+        MilestoneText.enabled = true;
+
+        Invoke("CloseMilestone", 1.0f);
+    }
+
+    public void CloseMilestone()
+    {
+        MilestoneText.enabled = false;
+        Score.milestone -= DisplayMilestone;
+    }
     public void CompleteLevel ()
     {
         completeLevelUI.SetActive(true);
